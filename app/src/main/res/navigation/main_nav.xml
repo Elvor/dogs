@@ -4,6 +4,28 @@
     app:startDestination="@id/mainFragment">
     <fragment
         android:id="@+id/mainFragment"
-        android:name="org.elvor.dogs.MainFragment"
-        android:label="MainFragment" />
+        android:name="org.elvor.dogs.ui.main.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_subbreedListFragment"
+            app:destination="@id/subbreedListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_galleryFragment"
+            app:destination="@id/galleryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/subbreedListFragment"
+        android:name="org.elvor.dogs.ui.subbreed_list.SubbreedListFragment"
+        android:label="SubbreedListFragment" >
+        <argument
+            android:name="ARG_BREED"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_subbreedListFragment_to_galleryFragment"
+            app:destination="@id/galleryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="org.elvor.dogs.ui.gallery.GalleryFragment"
+        android:label="GalleryFragment" />
 </navigation>

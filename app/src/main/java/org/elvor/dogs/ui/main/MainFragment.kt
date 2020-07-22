@@ -1,4 +1,4 @@
-package org.elvor.dogs
+package org.elvor.dogs.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,22 +10,23 @@ import org.elvor.dogs.databinding.FragmentMainBinding
 class MainFragment : Fragment() {
 
     companion object {
-        const val CURRENT_TAB_ARG = "CURRENT_TAB_ARG"
+        const val ARG_CURRENT_TAB = "ARG_CURRENT_TAB"
         const val BREEDS_TAB = 0
         const val FAVOURITES_TAB = 1
     }
 
     private lateinit var binding: FragmentMainBinding
-    private var currentTab = BREEDS_TAB
+    private var currentTab =
+        BREEDS_TAB
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt(CURRENT_TAB_ARG, currentTab)
+        outState.putInt(ARG_CURRENT_TAB, currentTab)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentTab = savedInstanceState?.getInt(CURRENT_TAB_ARG) ?: BREEDS_TAB
+        currentTab = savedInstanceState?.getInt(ARG_CURRENT_TAB) ?: BREEDS_TAB
     }
 
     override fun onCreateView(

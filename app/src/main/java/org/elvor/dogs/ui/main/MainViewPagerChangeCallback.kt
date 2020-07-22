@@ -1,4 +1,4 @@
-package org.elvor.dogs
+package org.elvor.dogs.ui.main
 
 import androidx.viewpager2.widget.ViewPager2
 

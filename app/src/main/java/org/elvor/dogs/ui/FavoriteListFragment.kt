@@ -1,4 +1,4 @@
-package org.elvor.dogs
+package org.elvor.dogs.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
