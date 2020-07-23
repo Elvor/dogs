@@ -1,4 +1,4 @@
-package org.elvor.dogs.ui.main
+package org.elvor.dogs.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

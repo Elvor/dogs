@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.elvor.dogs.databinding.ItemSubbreedBinding
+import org.elvor.dogs.ui.ListAdapter
 
 class SubbreedListAdapter(private val itemClickListener: (String) -> Unit) :
-    RecyclerView.Adapter<SubbreedListAdapter.ViewHolder>() {
+    RecyclerView.Adapter<SubbreedListAdapter.ViewHolder>(), ListAdapter<String> {
 
-    private var subbreedsData: List<String> = emptyList()
-
-    fun setData(subbreedData: List<String>) {
-        this.subbreedsData = subbreedData
+    override var items: List<String> = emptyList()
+    set(value) {
+        field = value
         notifyDataSetChanged()
     }
 
@@ -29,9 +29,9 @@ class SubbreedListAdapter(private val itemClickListener: (String) -> Unit) :
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = subbreedsData.size
+    override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(subbreedsData[position])
+        holder.bind(items[position])
     }
 }

@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">dogs</string>
     <string name="breeds">Breeds</string>
+    <string name="back">Back</string>
     <string name="favourites">Favourites</string>
+    <string name="share">Share</string>
+    <string name="share_title">Share photo</string>
+    <string name="cancel">Cancel</string>
     <string name="subbreeds">(%1$s subbreeds)</string>
+    <string name="network_error_title">Some server error</string>
+    <string name="network_error_message">Try again later</string>
+    <string name="network_error_ok">Ok</string>
 </resources>

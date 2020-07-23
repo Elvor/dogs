@@ -6,18 +6,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.elvor.dogs.R
 import org.elvor.dogs.databinding.ItemBreedBinding
+import org.elvor.dogs.ui.ListAdapter
+
 class BreedListAdapter(
     private val withSubbreedsClickListener: (String) -> Unit,
     private val withoutSubbreedsClickListener: (String) -> Unit
 ) :
-    RecyclerView.Adapter<BreedListAdapter.ViewHolder>() {
+    RecyclerView.Adapter<BreedListAdapter.ViewHolder>(), ListAdapter<Pair<String, Int>> {
 
-    private var breedsData: List<Pair<String, Int>> = emptyList()
-
-    fun setData(breedCollection: List<Pair<String, Int>>) {
-        this.breedsData = breedCollection
-        notifyDataSetChanged()
-    }
+    override var items: List<Pair<String, Int>> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     inner class ViewHolder(private val binding: ItemBreedBinding, private val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
@@ -29,7 +30,7 @@ class BreedListAdapter(
                         breedData.first
                     )
                 }
-                binding.subbreeds.text = context.getString(
+                binding.info.text = context.getString(
                     R.string.subbreeds,
                     breedData.second.toString()
                 )
@@ -39,7 +40,7 @@ class BreedListAdapter(
                         breedData.first
                     )
                 }
-                binding.subbreeds.text = ""
+                binding.info.text = ""
             }
         }
     }
@@ -49,9 +50,9 @@ class BreedListAdapter(
         return ViewHolder(binding, parent.context)
     }
 
-    override fun getItemCount(): Int = breedsData.size
+    override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(breedsData[position])
+        holder.bind(items[position])
     }
 }

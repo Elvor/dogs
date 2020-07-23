@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.elvor.dogs.databinding.FragmentMainBinding
+import org.elvor.dogs.ui.SimpleViewPagerChangeCallback
 
 class MainFragment : Fragment() {
 
@@ -38,7 +39,7 @@ class MainFragment : Fragment() {
         binding.let {
             it.pager.adapter = MainViewPagerAdapter(this)
             it.favourites.isEnabled = false
-            it.pager.registerOnPageChangeCallback(MainViewPagerChangeCallback { position ->
+            it.pager.registerOnPageChangeCallback(SimpleViewPagerChangeCallback { position ->
                 when (position) {
                     BREEDS_TAB -> switchToBreeds()
                     FAVOURITES_TAB -> switchToFavourites()
