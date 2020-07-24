@@ -1,12 +1,12 @@
 package org.elvor.dogs.ui
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +14,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.elvor.dogs.R
 import org.elvor.dogs.databinding.FragmentListBinding
+import org.elvor.dogs.ui.dialog.ErrorDialog
 import java.io.IOException
+
 
 abstract class BaseListFragment<D, VH : RecyclerView.ViewHolder?, A> :
     Fragment() where A : RecyclerView.Adapter<VH>, A : ListAdapter<D> {
@@ -31,9 +33,20 @@ abstract class BaseListFragment<D, VH : RecyclerView.ViewHolder?, A> :
             adapter = createAdapter()
         }
         binding = FragmentListBinding.inflate(inflater, container, false)
+        binding.title.text = getTitle()
         with(binding.list) {
-            layoutManager = LinearLayoutManager(context)
+            val manager = LinearLayoutManager(context)
+            layoutManager = manager
             adapter = this@BaseListFragment.adapter
+            val dividerItemDecoration = DividerItemDecoration(
+                context,
+                manager.orientation
+            )
+            val dividerDrawable = context.getDrawable(R.drawable.divider)
+            if (dividerDrawable != null) {
+                dividerItemDecoration.setDrawable(dividerDrawable)
+            }
+            addItemDecoration(dividerItemDecoration)
         }
         val backLabel = getBackLabel()
         if (backLabel != null) {
@@ -84,15 +97,21 @@ abstract class BaseListFragment<D, VH : RecyclerView.ViewHolder?, A> :
     }
 
     private fun showError() {
-        AlertDialog.Builder(activity)
-            .setTitle(getString(R.string.network_error_title))
-            .setMessage(getString(R.string.network_error_message))
-            .setNeutralButton(R.string.network_error_ok) { dialog, _ -> dialog.cancel() }
-            .create()
-            .show()
+        var dialog = ErrorDialog(requireContext())
+        val window = dialog.window ?: return
+        dialog.show()
+        with(window) {
+            setBackgroundDrawable(android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT))
+            setLayout(
+                android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        }
     }
 
     abstract suspend fun loadItems(): List<D>
+
+    abstract fun getTitle(): String
 
     open fun getBackLabel(): String? = null
 }

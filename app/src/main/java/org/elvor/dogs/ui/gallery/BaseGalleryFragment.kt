@@ -1,8 +1,10 @@
 package org.elvor.dogs.ui.gallery
 
-import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +13,10 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.elvor.dogs.DogsApplication
-import org.elvor.dogs.R
 import org.elvor.dogs.databinding.FragmentGalleryBinding
 import org.elvor.dogs.db.LikedImageDao
 import org.elvor.dogs.ui.SimpleViewPagerChangeCallback
+import org.elvor.dogs.ui.dialog.ShareDialog
 
 abstract class BaseGalleryFragment : Fragment() {
     companion object {
@@ -143,12 +145,15 @@ abstract class BaseGalleryFragment : Fragment() {
     protected abstract fun getBackLabel(): String
 
     private fun openShareDialog(breed: String, subbreed: String?, imageUrl: String) {
-        AlertDialog.Builder(requireContext())
-            .setPositiveButton(R.string.share) { _, _ -> onShare(breed, subbreed, imageUrl) }
-            .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.cancel() }
-            .setTitle(R.string.share_title)
-            .create()
-            .show()
+        val dialog = ShareDialog(requireContext()) { onShare(breed, subbreed, imageUrl) }
+        val window = dialog.window ?: return
+        dialog.show()
+        with(window) {
+            attributes.gravity = Gravity.BOTTOM
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        }
+
     }
 
     private fun onShare(breed: String, subbreed: String?, imageUrl: String) {

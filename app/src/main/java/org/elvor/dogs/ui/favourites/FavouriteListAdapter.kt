@@ -4,29 +4,32 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.elvor.dogs.R
-import org.elvor.dogs.databinding.ItemBreedBinding
-import org.elvor.dogs.databinding.ItemSubbreedBinding
+import org.elvor.dogs.databinding.ItemWithInfoBinding
 import org.elvor.dogs.ui.ListAdapter
 
 class FavouriteListAdapter(private val itemClickListener: (String, String?) -> Unit) :
-    RecyclerView.Adapter<FavouriteListAdapter.ViewHolder>(), ListAdapter<BreedInfo> {
+    RecyclerView.Adapter<FavouriteListAdapter.ViewHolder>(), ListAdapter<FavouriteInfo> {
 
-    override var items: List<BreedInfo> = emptyList()
+    override var items: List<FavouriteInfo> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    inner class ViewHolder(private val binding: ItemBreedBinding) :
+    inner class ViewHolder(private val binding: ItemWithInfoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(breedInfo: BreedInfo) {
+        fun bind(favouriteInfo: FavouriteInfo) {
             binding.name.text =
-                (if (breedInfo.subbreed != null) "${breedInfo.subbreed} ${breedInfo.breed}" else breedInfo.breed).capitalize()
-            binding.info.text = binding.info.context.resources.getQuantityString(R.plurals.photos, breedInfo.photoCount, breedInfo.photoCount)
+                (if (favouriteInfo.subbreed != null) "${favouriteInfo.subbreed} ${favouriteInfo.breed}" else favouriteInfo.breed).capitalize()
+            binding.info.text = binding.info.context.resources.getQuantityString(
+                R.plurals.photos,
+                favouriteInfo.photoCount,
+                favouriteInfo.photoCount
+            )
             binding.root.setOnClickListener {
                 this@FavouriteListAdapter.itemClickListener(
-                    breedInfo.breed,
-                    breedInfo.subbreed
+                    favouriteInfo.breed,
+                    favouriteInfo.subbreed
                 )
             }
         }
@@ -34,7 +37,7 @@ class FavouriteListAdapter(private val itemClickListener: (String, String?) -> U
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ItemBreedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemWithInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -45,4 +48,4 @@ class FavouriteListAdapter(private val itemClickListener: (String, String?) -> U
     }
 }
 
-data class BreedInfo(val breed: String, val subbreed: String?, val photoCount: Int)
+data class FavouriteInfo(val breed: String, val subbreed: String?, val photoCount: Int)

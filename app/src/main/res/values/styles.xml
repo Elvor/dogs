@@ -1,8 +1,45 @@
 <resources>
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">@font/pacifico_regular</item>
+        <item name="android:textSize">@dimen/common_text_size</item>
     </style>
 
+    <style name="dialog_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+        <item name="android:paddingTop">@dimen/dialog_item_padding</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="bottomPanelItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minWidth">70dp</item>
+        <item name="android:textColor">@color/tab_item_color</item>
+        <item name="android:paddingTop">@dimen/bottom_panel_icon_padding</item>
+    </style>
+
+    <style name="backIcon">
+        <item name="android:layout_width">@dimen/arrow_size</item>
+        <item name="android:layout_height">@dimen/arrow_size</item>
+        <item name="android:layout_marginStart">@dimen/back_image_start_margin</item>
+    </style>
+
+    <style name="pageTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/top_panel</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingTop">@dimen/item_top_padding</item>
+        <item name="android:paddingBottom">@dimen/item_bottom_padding</item>
+    </style>
 </resources>

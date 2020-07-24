@@ -1,7 +1,7 @@
 package org.elvor.dogs.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import org.elvor.dogs.R
 
 class MainActivity : AppCompatActivity() {

@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class LikedImage (
+data class LikedImage(
     @PrimaryKey val url: String,
     @ColumnInfo(name = "breed") val breed: String,
     @ColumnInfo(name = "subbreed") val subbreed: String?

@@ -4,4 +4,9 @@
         <item quantity="one">(%d photo)</item>
         <item quantity="other">(%d photos)</item>
     </plurals>
+
+    <plurals name="subbreeds">
+        <item quantity="one">(%d subbreed)</item>
+        <item quantity="other">(%d subbreeds)</item>
+    </plurals>
 </resources>

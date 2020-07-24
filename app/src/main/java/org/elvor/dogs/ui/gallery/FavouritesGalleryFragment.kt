@@ -1,8 +1,6 @@
 package org.elvor.dogs.ui.gallery
 
 import android.content.Context
-import android.graphics.drawable.Drawable
-import android.util.Log
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -10,9 +8,6 @@ import kotlinx.coroutines.withContext
 import org.elvor.dogs.DogsApplication
 import org.elvor.dogs.R
 import org.elvor.dogs.db.AppDatabase
-import org.elvor.dogs.db.LikedImage
-import org.elvor.dogs.db.LikedImageDao
-import java.lang.IllegalStateException
 import javax.inject.Inject
 
 class FavouritesGalleryFragment : BaseGalleryFragment() {
@@ -29,7 +24,8 @@ class FavouritesGalleryFragment : BaseGalleryFragment() {
         DogsApplication.mainScope.launch {
             withContext(Dispatchers.IO) {
                 with(database.likedImageDao()) {
-                    val likedImage = findByUrlAsync(url) ?: throw IllegalStateException("liked image with url $url not found")
+                    val likedImage = findByUrlAsync(url)
+                        ?: throw IllegalStateException("liked image with url $url not found")
                     deleteAsync(likedImage)
                 }
             }

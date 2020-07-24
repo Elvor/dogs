@@ -12,5 +12,7 @@ class DogsApplication : Application() {
         val mainScope = CoroutineScope(Dispatchers.Main)
     }
 
-    val appComponent: AppComponent by lazy { DaggerAppComponent.factory().create(applicationContext) }
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent.factory().create(applicationContext)
+    }
 }

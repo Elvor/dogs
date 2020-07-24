@@ -1,7 +1,6 @@
 package org.elvor.dogs.ui.gallery
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

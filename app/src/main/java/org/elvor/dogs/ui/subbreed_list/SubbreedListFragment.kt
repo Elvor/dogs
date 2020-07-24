@@ -51,4 +51,5 @@ class SubbreedListFragment :
     }
 
     override fun getBackLabel(): String? = getString(R.string.breeds)
+    override fun getTitle(): String = breed.capitalize()
 }

@@ -3,29 +3,29 @@ package org.elvor.dogs.ui.subbreed_list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.elvor.dogs.databinding.ItemSubbreedBinding
+import org.elvor.dogs.databinding.ItemBinding
 import org.elvor.dogs.ui.ListAdapter
 
 class SubbreedListAdapter(private val itemClickListener: (String) -> Unit) :
     RecyclerView.Adapter<SubbreedListAdapter.ViewHolder>(), ListAdapter<String> {
 
     override var items: List<String> = emptyList()
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
-    inner class ViewHolder(private val binding: ItemSubbreedBinding) :
+    inner class ViewHolder(private val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(subbreed: String) {
-            binding.name.text = subbreed
-            binding.root.setOnClickListener{this@SubbreedListAdapter.itemClickListener(subbreed)}
+            binding.name.text = subbreed.capitalize()
+            binding.root.setOnClickListener { this@SubbreedListAdapter.itemClickListener(subbreed) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ItemSubbreedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

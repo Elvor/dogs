@@ -16,7 +16,7 @@ class MainModule {
 
     @Provides
     @Singleton
-    fun provideRetrofitService() : Retrofit {
+    fun provideRetrofitService(): Retrofit {
 
         return Retrofit.Builder()
             .baseUrl("https://dog.ceo/api/")
@@ -27,13 +27,13 @@ class MainModule {
 
     @Provides
     @Singleton
-    fun provideDogsService(retrofit: Retrofit) : DogsService {
+    fun provideDogsService(retrofit: Retrofit): DogsService {
         return retrofit.create(DogsService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideDatabase(applicationContext: Context) : AppDatabase {
+    fun provideDatabase(applicationContext: Context): AppDatabase {
         return Room.databaseBuilder(applicationContext, AppDatabase::class.java, "dogs").build()
     }
 }

@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="arrow_size">15dp</dimen>
-    <dimen name="share_size">15dp</dimen>
-    <dimen name="item_padding">4dp</dimen>
+    <dimen name="list_item_drawable_margin">5dp</dimen>
+    <dimen name="list_margin">5dp</dimen>
+    <dimen name="gallery_share_size">28dp</dimen>
+    <dimen name="item_top_padding">8dp</dimen>
+    <dimen name="item_bottom_padding">10dp</dimen>
+    <dimen name="dialog_margin">8dp</dimen>
+    <dimen name="error_dialog_margin">40dp</dimen>
+    <dimen name="dialog_item_padding">4dp</dimen>
+    <dimen name="common_text_size">15sp</dimen>
+    <dimen name="small_text_size">12sp</dimen>
+    <dimen name="large_text_size">20sp</dimen>
+    <dimen name="bottom_panel_icon_size">25dp</dimen>
+    <dimen name="bottom_panel_icon_padding">10dp</dimen>
+    <dimen name="share_end_margin">25dp</dimen>
+    <dimen name="gallery_like_size">35dp</dimen>
+    <dimen name="gallery_like_margin">35dp</dimen>
+    <dimen name="back_image_start_margin">10dp</dimen>
+    <dimen name="item_info_start_margin">5dp</dimen>
 </resources>

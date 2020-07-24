@@ -5,39 +5,40 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.elvor.dogs.R
-import org.elvor.dogs.databinding.ItemBreedBinding
+import org.elvor.dogs.databinding.ItemWithInfoBinding
 import org.elvor.dogs.ui.ListAdapter
 
 class BreedListAdapter(
     private val withSubbreedsClickListener: (String) -> Unit,
     private val withoutSubbreedsClickListener: (String) -> Unit
 ) :
-    RecyclerView.Adapter<BreedListAdapter.ViewHolder>(), ListAdapter<Pair<String, Int>> {
+    RecyclerView.Adapter<BreedListAdapter.ViewHolder>(), ListAdapter<BreedInfo> {
 
-    override var items: List<Pair<String, Int>> = emptyList()
+    override var items: List<BreedInfo> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    inner class ViewHolder(private val binding: ItemBreedBinding, private val context: Context) :
+    inner class ViewHolder(private val binding: ItemWithInfoBinding, private val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(breedData: Pair<String, Int>) {
-            binding.name.text = breedData.first
-            if (breedData.second > 0) {
+        fun bind(breedInfo: BreedInfo) {
+            binding.name.text = breedInfo.name.capitalize()
+            if (breedInfo.subbreedsCount > 0) {
                 binding.root.setOnClickListener {
                     this@BreedListAdapter.withSubbreedsClickListener(
-                        breedData.first
+                        breedInfo.name
                     )
                 }
-                binding.info.text = context.getString(
-                    R.string.subbreeds,
-                    breedData.second.toString()
+                binding.info.text = context.resources.getQuantityString(
+                    R.plurals.subbreeds,
+                    breedInfo.subbreedsCount,
+                    breedInfo.subbreedsCount
                 )
             } else {
                 binding.root.setOnClickListener {
                     this@BreedListAdapter.withoutSubbreedsClickListener(
-                        breedData.first
+                        breedInfo.name
                     )
                 }
                 binding.info.text = ""
@@ -46,7 +47,8 @@ class BreedListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemBreedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemWithInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding, parent.context)
     }
 
@@ -56,3 +58,5 @@ class BreedListAdapter(
         holder.bind(items[position])
     }
 }
+
+data class BreedInfo(val name: String, val subbreedsCount: Int)
