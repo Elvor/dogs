@@ -21,7 +21,7 @@ import java.io.IOException
 abstract class BaseListFragment<D, VH : RecyclerView.ViewHolder?, A> :
     Fragment() where A : RecyclerView.Adapter<VH>, A : ListAdapter<D> {
 
-    protected lateinit var binding: FragmentListBinding
+    private lateinit var binding: FragmentListBinding
     protected lateinit var adapter: A
 
     override fun onCreateView(
@@ -67,10 +67,6 @@ abstract class BaseListFragment<D, VH : RecyclerView.ViewHolder?, A> :
         return binding.root
     }
 
-    private fun navigateBack() {
-        findNavController().navigateUp()
-    }
-
     override fun onStart() {
         super.onStart()
         CoroutineScope(Dispatchers.Main).launch {
@@ -85,6 +81,9 @@ abstract class BaseListFragment<D, VH : RecyclerView.ViewHolder?, A> :
         }
     }
 
+    private fun navigateBack() {
+        findNavController().navigateUp()
+    }
 
     abstract fun createAdapter(): A
 
@@ -103,8 +102,8 @@ abstract class BaseListFragment<D, VH : RecyclerView.ViewHolder?, A> :
         with(window) {
             setBackgroundDrawable(android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT))
             setLayout(
-                android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-                android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
             )
         }
     }

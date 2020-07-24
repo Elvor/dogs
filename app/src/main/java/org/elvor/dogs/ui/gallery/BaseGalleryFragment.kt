@@ -57,25 +57,6 @@ abstract class BaseGalleryFragment : Fragment() {
         updateLikeDrawable()
     }
 
-    override fun onStart() {
-        super.onStart()
-        DogsApplication.mainScope.launch {
-            val imageUrls = fetchImageUrls()
-            galleryAdapter.items = imageUrls
-            postImageFetch()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.pager.registerOnPageChangeCallback(onPageChangeCallback)
-    }
-
-    override fun onPause() {
-        binding.pager.unregisterOnPageChangeCallback(onPageChangeCallback)
-        super.onPause()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val args = arguments ?: throw IllegalArgumentException("no arguments")
@@ -112,6 +93,25 @@ abstract class BaseGalleryFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        DogsApplication.mainScope.launch {
+            val imageUrls = fetchImageUrls()
+            galleryAdapter.items = imageUrls
+            postImageFetch()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.pager.registerOnPageChangeCallback(onPageChangeCallback)
+    }
+
+    override fun onPause() {
+        binding.pager.unregisterOnPageChangeCallback(onPageChangeCallback)
+        super.onPause()
     }
 
     private fun navigateBack() {

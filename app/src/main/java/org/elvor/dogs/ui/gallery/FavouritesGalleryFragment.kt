@@ -15,6 +15,11 @@ class FavouritesGalleryFragment : BaseGalleryFragment() {
     @Inject
     lateinit var database: AppDatabase
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as DogsApplication).appComponent.inject(this)
+    }
+
     override fun getLikeImageDrawable(url: String): Int {
         return R.drawable.favourites_liked
     }
@@ -44,9 +49,4 @@ class FavouritesGalleryFragment : BaseGalleryFragment() {
     }
 
     override fun getBackLabel(): String = getString(R.string.favourites)
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as DogsApplication).appComponent.inject(this)
-    }
 }
